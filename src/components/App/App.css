@@ -1,0 +1,16 @@
+.app {
+  background-color: #f3f3f3;
+  color: #000000;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0%;
+}
+
+.app__content {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
