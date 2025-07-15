@@ -5,6 +5,11 @@
   overflow: hidden;
 }
 
+.modal__close-button_type_white {
+  top: 24px;
+  right: 24px;
+}
+
 .modal__image {
   width: 100%;
   object-fit: cover;
