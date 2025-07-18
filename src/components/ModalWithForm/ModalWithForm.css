@@ -79,18 +79,29 @@
   margin-bottom: 12px;
 }
 
-.modal__radio-input {
-  width: 16px;
-  height: 16px;
-}
-
-.modal__label_type_radio {
+.modal__radio-button {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 8px;
+}
+
+.modal__radio-input {
+  width: 16px;
+  height: 16px;
+  accent-color: #000;
+  cursor: pointer;
+}
+
+.modal__radio-input:not(:checked) + label {
+  opacity: 50%;
+}
+
+.modal__label_type_radio {
   font-size: 16px;
   line-height: 20px;
-  margin-bottom: 8px;
+  width: fit-content;
+  cursor: pointer;
 }
 
 .modal__submit-button {
@@ -105,4 +116,9 @@
   padding: 0;
   margin-top: 32px;
   cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.modal__submit-button:hover {
+  opacity: 60%;
 }
