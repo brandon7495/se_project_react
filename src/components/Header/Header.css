@@ -6,6 +6,7 @@
 
 .header__logo {
   margin-right: 24px;
+  cursor: pointer;
 }
 
 .header__date-location {
@@ -21,10 +22,16 @@
   cursor: pointer;
 }
 
-.header__user-container {
+.header__profile-link {
+  text-decoration: none;
+  color: #000;
+}
+
+.header__profile {
   display: flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
 }
 
 .header__username {

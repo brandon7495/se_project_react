@@ -1,8 +1,19 @@
+.item-modal__content {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #0000004d;
+  padding: 0;
+  max-width: 498px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .modal__content_type_image {
   border-radius: 16px;
   border: none;
-  padding: 0;
   overflow: hidden;
+  padding: 0;
 }
 
 .modal__close-button_type_white {

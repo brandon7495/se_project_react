@@ -5,7 +5,7 @@ import closeButtonWhite from "../../assets/close-white.svg";
 function ItemModal({ activeModal, onClose, card }) {
   return (
     <div className={`modal ${activeModal === "preview" && "modal__opened"}`}>
-      <div className="modal__content modal__content_type_image">
+      <div className="item-modal__content modal__content_type_image">
         <button
           onClick={onClose}
           type="button"
