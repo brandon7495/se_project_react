@@ -10,9 +10,9 @@ import ItemModal from "../ItemModal/ItemModal";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import Profile from "../Profile/Profile";
 
-import { defaultClothingItems } from "../../utils/constants";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { coordinates, APIkey } from "../../utils/constants";
+import { getItems, postItems, deleteItems } from "../../utils/api";
 
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
@@ -24,7 +24,7 @@ function App() {
     condition: "",
     isDay: true,
   });
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
@@ -47,19 +47,22 @@ function App() {
   };
 
   const handleCardDelete = () => {
-    const filtered = clothingItems.filter(
-      (item) => item._id !== selectedCard._id
-    );
-    setClothingItems(filtered);
-    closeActiveModal();
+    deleteItems(selectedCard._id).then(() => {
+      const filtered = clothingItems.filter(
+        (item) => item._id !== selectedCard._id
+      );
+      setClothingItems(filtered);
+      closeActiveModal();
+    });
   };
 
   const handleAddItemModalSubmit = ({ name, weather, imageUrl }) => {
-    setClothingItems((prevItems) => [
-      { name, weather, link: imageUrl },
-      ...prevItems,
-    ]);
-    closeActiveModal();
+    postItems({ name, weather, imageUrl })
+      .then((data) => {
+        setClothingItems((prevItems) => [data, ...prevItems]);
+        closeActiveModal();
+      })
+      .catch(console.error);
   };
 
   useEffect(() => {
@@ -71,6 +74,14 @@ function App() {
       .catch((error) => {
         console.error("Failed to fetch weather data:", error);
       });
+  }, []);
+
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        setClothingItems(data);
+      })
+      .catch(console.error);
   }, []);
 
   return (
@@ -93,7 +104,13 @@ function App() {
             />
             <Route
               path="/profile"
-              element={<Profile onCardClick={handleCardClick} />}
+              element={
+                <Profile
+                  onCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                  handleAddClick={handleAddClick}
+                />
+              }
             />
           </Routes>
           <Footer />
