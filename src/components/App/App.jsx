@@ -46,6 +46,14 @@ function App() {
     setActiveModal("");
   };
 
+  const handleCardDelete = () => {
+    const filtered = clothingItems.filter(
+      (item) => item._id !== selectedCard._id
+    );
+    setClothingItems(filtered);
+    closeActiveModal();
+  };
+
   const handleAddItemModalSubmit = ({ name, weather, imageUrl }) => {
     setClothingItems((prevItems) => [
       { name, weather, link: imageUrl },
@@ -99,6 +107,7 @@ function App() {
           activeModal={activeModal}
           card={selectedCard}
           onClose={closeActiveModal}
+          onDelete={handleCardDelete}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>

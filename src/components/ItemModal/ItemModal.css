@@ -41,3 +41,13 @@
   font-size: 20px;
   line-height: 24px;
 }
+
+.item-modal__delete-button {
+  color: #ff4d00;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 34px;
+  bottom: 74px;
+}
