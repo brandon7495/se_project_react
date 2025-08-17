@@ -47,13 +47,15 @@ function App() {
   };
 
   const handleCardDelete = () => {
-    deleteItems(selectedCard._id).then(() => {
-      const filtered = clothingItems.filter(
-        (item) => item._id !== selectedCard._id
-      );
-      setClothingItems(filtered);
-      closeActiveModal();
-    });
+    deleteItems(selectedCard._id)
+      .then(() => {
+        const filtered = clothingItems.filter(
+          (item) => item._id !== selectedCard._id
+        );
+        setClothingItems(filtered);
+        closeActiveModal();
+      })
+      .catch(console.error);
   };
 
   const handleAddItemModalSubmit = ({ name, weather, imageUrl }) => {
