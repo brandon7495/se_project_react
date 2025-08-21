@@ -28,6 +28,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -46,6 +47,20 @@ function App() {
     setActiveModal("");
   };
 
+  useEffect(() => {
+    if (!activeModal) return;
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [activeModal]);
+
   const handleCardDelete = () => {
     deleteItems(selectedCard._id)
       .then(() => {
@@ -59,6 +74,7 @@ function App() {
   };
 
   const handleAddItemModalSubmit = ({ name, weather, imageUrl }) => {
+    setIsLoading(true);
     postItems({ name, weather, imageUrl })
       .then((data) => {
         setClothingItems((prevItems) => [data, ...prevItems]);

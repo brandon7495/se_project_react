@@ -1,30 +1,35 @@
 import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useState } from "react";
+import useForm from "../../hooks/useForm";
 
 function AddItemModal({ isOpen, onClose, onAddItemModalSubmit }) {
-  const [name, setName] = useState("");
-  const [weather, setWeather] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const { values, handleChange, setValues } = useForm({
+    name: "",
+    weather: "",
+    imageUrl: "",
+  });
 
   const handleNameChange = (e) => {
-    setName(e.target.value);
+    setValues({ ...values, name: e.target.value });
   };
 
   const handleImageUrlChange = (e) => {
-    setImageUrl(e.target.value);
+    setValues({ ...values, imageUrl: e.target.value });
   };
 
   const handleWeatherChange = (e) => {
-    setWeather(e.target.value);
+    setValues({ ...values, weather: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItemModalSubmit({ name, weather, imageUrl });
-    setName("");
-    setWeather("");
-    setImageUrl("");
+    onAddItemModalSubmit(values).then(() => {
+      setValues({
+        name: "",
+        weather: "",
+        imageUrl: "",
+      });
+    });
   };
 
   return (
