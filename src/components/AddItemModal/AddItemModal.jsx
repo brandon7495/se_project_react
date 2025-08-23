@@ -8,6 +8,7 @@ function AddItemModal({ isOpen, onClose, onAddItemModalSubmit }) {
     weather: "",
     imageUrl: "",
   });
+  const { name, weather, imageUrl } = values;
 
   const handleNameChange = (e) => {
     setValues({ ...values, name: e.target.value });
