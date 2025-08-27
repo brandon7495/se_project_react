@@ -75,7 +75,7 @@ function App() {
 
   const handleAddItemModalSubmit = ({ name, weather, imageUrl }) => {
     setIsLoading(true);
-    postItems({ name, weather, imageUrl })
+    return postItems({ name, weather, imageUrl })
       .then((data) => {
         setClothingItems((prevItems) => [data, ...prevItems]);
         closeActiveModal();
