@@ -24,4 +24,14 @@ function signin({ email, password }) {
   });
 }
 
-export { signup, signin };
+function checkToken(token) {
+  return request(`${baseUrl}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+export { signup, signin, checkToken };

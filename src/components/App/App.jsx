@@ -19,7 +19,8 @@ import { coordinates, APIkey } from "../../utils/constants";
 import { getItems, postItems, deleteItems } from "../../utils/api";
 
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
-import { signup, signin } from "../../utils/auth";
+import { signup, signin, checkToken } from "../../utils/auth";
+import { use } from "react";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -76,7 +77,7 @@ function App() {
         setClothingItems(filtered);
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch((error) => console.error("Failed to delete item:", error));
   };
 
   const handleAddItemModalSubmit = ({ name, weather, imageUrl }) => {
@@ -86,7 +87,7 @@ function App() {
         setClothingItems((prevItems) => [data, ...prevItems]);
         closeActiveModal();
       })
-      .catch(console.error)
+      .catch((error) => console.error("Failed to add item:", error))
       .finally(() => {
         setIsLoading(false);
       });
@@ -102,7 +103,7 @@ function App() {
         setIsLoggedIn(true);
         closeActiveModal();
       })
-      .catch(console.error)
+      .catch((error) => console.error("Registration failed:", error))
       .finally(() => {
         setIsLoading(false);
       });
@@ -111,15 +112,31 @@ function App() {
   const handleLoginModalSubmit = ({ email, password }) => {
     setIsLoading(true);
     return signin({ email, password })
-      .then(() => {
+      .then((res) => {
         setIsLoggedIn(true);
         closeActiveModal();
+        localStorage.setItem("jwt", res.token);
       })
-      .catch(console.error)
+      .catch((error) => console.error("Login failed:", error))
       .finally(() => {
         setIsLoading(false);
       });
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      checkToken(token)
+        .then(() => {
+          setIsLoggedIn(true);
+        })
+        .catch((error) => {
+          console.error("Token validation failed:", error);
+          setIsLoggedIn(false);
+          localStorage.removeItem("jwt");
+        });
+    }
+  }, []);
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
