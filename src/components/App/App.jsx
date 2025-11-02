@@ -8,6 +8,7 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import ItemModal from "../ItemModal/ItemModal";
 import AddItemModal from "../AddItemModal/AddItemModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
 import Profile from "../Profile/Profile";
 
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
@@ -15,6 +16,7 @@ import { coordinates, APIkey } from "../../utils/constants";
 import { getItems, postItems, deleteItems } from "../../utils/api";
 
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
+import { signUp } from "../../utils/auth";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -80,7 +82,22 @@ function App() {
         setClothingItems((prevItems) => [data, ...prevItems]);
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const handleRegisterModalSubmit = ({ email, password, name, imageUrl }) => {
+    setIsLoading(true);
+    return signUp({ email, password, name, avatar: imageUrl })
+      .then(() => {
+        closeActiveModal();
+      })
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -137,6 +154,11 @@ function App() {
           isOpen={activeModal === "add-garment"}
           onClose={closeActiveModal}
           onAddItemModalSubmit={handleAddItemModalSubmit}
+        />
+        <RegisterModal
+          isOpen={activeModal === "register"}
+          onClose={closeActiveModal}
+          onRegisterModalSubmit={handleRegisterModalSubmit}
         />
         <ItemModal
           activeModal={activeModal}

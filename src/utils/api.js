@@ -33,4 +33,4 @@ function deleteItems(id) {
   });
 }
 
-export { getItems, postItems, deleteItems };
+export { getItems, postItems, deleteItems, request, baseUrl };
