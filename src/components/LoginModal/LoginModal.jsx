@@ -1,30 +1,26 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import useForm from "../../hooks/useForm";
 
-const RegisterModal = ({ isOpen, onClose, onRegisterModalSubmit }) => {
+const LoginModal = ({ isOpen, onClose, onLoginModalSubmit }) => {
   const { values, handleChange, setValues } = useForm({
     email: "",
     password: "",
-    name: "",
-    imageUrl: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onRegisterModalSubmit(values).then(() => {
+    onLoginModalSubmit(values).then(() => {
       setValues({
         email: "",
         password: "",
-        name: "",
-        imageUrl: "",
       });
     });
   };
 
   return (
     <ModalWithForm
-      title="Sign up"
-      buttonText="Next"
+      title="Log in"
+      buttonText="Log in"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
@@ -55,36 +51,8 @@ const RegisterModal = ({ isOpen, onClose, onRegisterModalSubmit }) => {
           value={values.password}
         />
       </label>
-      <label htmlFor="name" className="modal__label">
-        Name{" "}
-        <input
-          type="text"
-          className="modal__input"
-          id="name"
-          name="name"
-          placeholder="Name"
-          required
-          minLength="1"
-          maxLength="30"
-          onChange={handleChange}
-          value={values.name}
-        />
-      </label>
-      <label htmlFor="imageUrl" className="modal__label">
-        Avatar URL{" "}
-        <input
-          type="url"
-          className="modal__input"
-          id="imageUrl"
-          name="imageUrl"
-          placeholder="Avatar URL"
-          required
-          onChange={handleChange}
-          value={values.imageUrl}
-        />
-      </label>
     </ModalWithForm>
   );
 };
 
-export default RegisterModal;
+export default LoginModal;

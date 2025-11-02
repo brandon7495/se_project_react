@@ -3,12 +3,15 @@ import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import ItemModal from "../ItemModal/ItemModal";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
 import Profile from "../Profile/Profile";
 
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
@@ -16,7 +19,7 @@ import { coordinates, APIkey } from "../../utils/constants";
 import { getItems, postItems, deleteItems } from "../../utils/api";
 
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
-import { signUp } from "../../utils/auth";
+import { signup, signin } from "../../utils/auth";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -31,6 +34,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -90,8 +94,25 @@ function App() {
 
   const handleRegisterModalSubmit = ({ email, password, name, imageUrl }) => {
     setIsLoading(true);
-    return signUp({ email, password, name, avatar: imageUrl })
+    return signup({ email, password, name, avatar: imageUrl })
       .then(() => {
+        return signin({ email, password });
+      })
+      .then(() => {
+        setIsLoggedIn(true);
+        closeActiveModal();
+      })
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const handleLoginModalSubmit = ({ email, password }) => {
+    setIsLoading(true);
+    return signin({ email, password })
+      .then(() => {
+        setIsLoggedIn(true);
         closeActiveModal();
       })
       .catch(console.error)
@@ -140,11 +161,13 @@ function App() {
             <Route
               path="/profile"
               element={
-                <Profile
-                  onCardClick={handleCardClick}
-                  clothingItems={clothingItems}
-                  handleAddClick={handleAddClick}
-                />
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <Profile
+                    onCardClick={handleCardClick}
+                    clothingItems={clothingItems}
+                    handleAddClick={handleAddClick}
+                  />
+                </ProtectedRoute>
               }
             />
           </Routes>
@@ -159,6 +182,11 @@ function App() {
           isOpen={activeModal === "register"}
           onClose={closeActiveModal}
           onRegisterModalSubmit={handleRegisterModalSubmit}
+        />
+        <LoginModal
+          isOpen={activeModal === "login"}
+          onClose={closeActiveModal}
+          onLoginModalSubmit={handleLoginModalSubmit}
         />
         <ItemModal
           activeModal={activeModal}

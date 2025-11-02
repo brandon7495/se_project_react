@@ -1,6 +1,6 @@
 import { request, baseUrl } from "./api";
 
-function signUp({ email, password, name, avatar }) {
+function signup({ email, password, name, avatar }) {
   return request(`${baseUrl}/signup`, {
     headers: { "Content-Type": "application/json" },
     method: "POST",
@@ -13,7 +13,7 @@ function signUp({ email, password, name, avatar }) {
   });
 }
 
-function signIn({ email, password }) {
+function signin({ email, password }) {
   return request(`${baseUrl}/signin`, {
     headers: { "Content-Type": "application/json" },
     method: "POST",
@@ -24,4 +24,4 @@ function signIn({ email, password }) {
   });
 }
 
-export { signUp, signIn };
+export { signup, signin };
