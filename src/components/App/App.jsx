@@ -13,10 +13,16 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import Profile from "../Profile/Profile";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { coordinates, APIkey } from "../../utils/constants";
-import { getItems, postItems, deleteItems } from "../../utils/api";
+import {
+  getItems,
+  postItems,
+  deleteItems,
+  updateProfile,
+} from "../../utils/api";
 
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
@@ -61,6 +67,10 @@ function App() {
 
   const handleLoginClick = () => {
     setActiveModal("login");
+  };
+
+  const handleEditProfileClick = () => {
+    setActiveModal("edit-profile");
   };
 
   const closeActiveModal = () => {
@@ -144,6 +154,27 @@ function App() {
       });
   };
 
+  const handleEditProfileSubmit = ({ name, avatar }) => {
+    setIsLoading(true);
+    return updateProfile({
+      name,
+      avatar,
+      token: localStorage.getItem("jwt"),
+    })
+      .then(() => {
+        setCurrentUser((prevUser) => ({
+          ...prevUser,
+          name,
+          avatar,
+        }));
+        closeActiveModal();
+      })
+      .catch((error) => console.error("Profile update failed:", error))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token) {
@@ -214,6 +245,7 @@ function App() {
                       clothingItems={clothingItems}
                       handleAddClick={handleAddClick}
                       currentUser={currentUser}
+                      onEditProfileClick={handleEditProfileClick}
                     />
                   </ProtectedRoute>
                 }
@@ -243,6 +275,12 @@ function App() {
             card={selectedCard}
             onClose={closeActiveModal}
             onDelete={handleCardDelete}
+            currentUser={currentUser}
+          />
+          <EditProfileModal
+            isOpen={activeModal === "edit-profile"}
+            onClose={closeActiveModal}
+            onSubmit={handleEditProfileSubmit}
             currentUser={currentUser}
           />
         </div>

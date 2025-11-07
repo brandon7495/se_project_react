@@ -1,9 +1,15 @@
 .sidebar {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 229px;
+}
+
+.sidebar__header {
+  display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 16px;
-  width: 229px;
+  gap: 12px;
 }
 
 .sidebar__avatar {
@@ -29,4 +35,24 @@
 
 .sidebar__username {
   margin: 0;
+}
+
+.sidebar__edit-button {
+  margin: 24px 0 0;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.sidebar__logout-button {
+  margin: 8px 0 0;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  line-height: 24px;
 }
