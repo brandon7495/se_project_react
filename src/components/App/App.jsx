@@ -82,7 +82,7 @@ function App() {
   }, [activeModal]);
 
   const handleCardDelete = () => {
-    deleteItems(selectedCard._id)
+    deleteItems(selectedCard._id, localStorage.getItem("jwt"))
       .then(() => {
         const filtered = clothingItems.filter(
           (item) => item._id !== selectedCard._id
@@ -95,7 +95,12 @@ function App() {
 
   const handleAddItemModalSubmit = ({ name, weather, imageUrl }) => {
     setIsLoading(true);
-    return postItems({ name, weather, imageUrl })
+    return postItems({
+      name,
+      weather,
+      imageUrl,
+      token: localStorage.getItem("jwt"),
+    })
       .then((data) => {
         setClothingItems((prevItems) => [data, ...prevItems]);
         closeActiveModal();
@@ -234,10 +239,11 @@ function App() {
             handleSignupClick={handleSignupClick}
           />
           <ItemModal
-            activeModal={activeModal}
+            isOpen={activeModal === "preview"}
             card={selectedCard}
             onClose={closeActiveModal}
             onDelete={handleCardDelete}
+            currentUser={currentUser}
           />
         </div>
       </CurrentTemperatureUnitContext.Provider>
