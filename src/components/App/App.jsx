@@ -73,6 +73,12 @@ function App() {
     setActiveModal("edit-profile");
   };
 
+  const handleLogoutClick = () => {
+    setIsLoggedIn(false);
+    setCurrentUser({ name: "Guest", email: "", avatar: "" });
+    localStorage.removeItem("jwt");
+  };
+
   const closeActiveModal = () => {
     setActiveModal("");
   };
@@ -246,6 +252,7 @@ function App() {
                       handleAddClick={handleAddClick}
                       currentUser={currentUser}
                       onEditProfileClick={handleEditProfileClick}
+                      onLogoutClick={handleLogoutClick}
                     />
                   </ProtectedRoute>
                 }

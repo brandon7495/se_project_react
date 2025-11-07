@@ -9,6 +9,7 @@ function Profile({
   handleAddClick,
   currentUser,
   onEditProfileClick,
+  onLogoutClick,
 }) {
   return (
     <div className="profile">
@@ -16,6 +17,7 @@ function Profile({
         <SideBar
           currentUser={currentUser}
           onEditProfileClick={onEditProfileClick}
+          onLogoutClick={onLogoutClick}
         />
       </section>
       <section className="profile__clothes-section">
