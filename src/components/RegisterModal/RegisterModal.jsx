@@ -1,7 +1,13 @@
+import "./RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import useForm from "../../hooks/useForm";
 
-const RegisterModal = ({ isOpen, onClose, onRegisterModalSubmit }) => {
+const RegisterModal = ({
+  isOpen,
+  onClose,
+  onRegisterModalSubmit,
+  handleLoginClick,
+}) => {
   const { values, handleChange, setValues } = useForm({
     email: "",
     password: "",
@@ -23,8 +29,8 @@ const RegisterModal = ({ isOpen, onClose, onRegisterModalSubmit }) => {
 
   return (
     <ModalWithForm
-      title="Sign up"
-      buttonText="Next"
+      title="Sign Up"
+      buttonText="Sign Up"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
@@ -83,6 +89,13 @@ const RegisterModal = ({ isOpen, onClose, onRegisterModalSubmit }) => {
           value={values.imageUrl}
         />
       </label>
+      <button
+        type="button"
+        className="register-modal__secondary-button"
+        onClick={handleLoginClick}
+      >
+        or Log In
+      </button>
     </ModalWithForm>
   );
 };

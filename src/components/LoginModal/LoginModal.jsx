@@ -25,8 +25,8 @@ const LoginModal = ({
 
   return (
     <ModalWithForm
-      title="Log in"
-      buttonText="Log in"
+      title="Log In"
+      buttonText="Log In"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
