@@ -208,6 +208,7 @@ function App() {
                       onCardClick={handleCardClick}
                       clothingItems={clothingItems}
                       handleAddClick={handleAddClick}
+                      currentUser={currentUser}
                     />
                   </ProtectedRoute>
                 }

@@ -51,6 +51,7 @@ const LoginModal = ({ isOpen, onClose, onLoginModalSubmit }) => {
           value={values.password}
         />
       </label>
+      <button type="button">or Sign Up</button>
     </ModalWithForm>
   );
 };

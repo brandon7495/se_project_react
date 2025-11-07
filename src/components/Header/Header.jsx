@@ -5,7 +5,6 @@ import "./Header.css";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 import logo from "../../assets/logo.svg";
-import avatar from "../../assets/avatar.png";
 
 function Header({
   handleAddClick,
@@ -42,35 +41,42 @@ function Header({
             {" "}
             <div className="header__profile">
               <p className="header__username">{currentUser.name}</p>
-              <img
-                src={currentUser.avatar}
-                alt="Avatar"
-                className="header__avatar"
-              />
+              {currentUser.avatar ? (
+                <img
+                  src={currentUser.avatar}
+                  alt="Avatar"
+                  className="header__avatar"
+                />
+              ) : (
+                <div className="header__avatar-placeholder">
+                  {currentUser.name.charAt(0)}
+                </div>
+              )}
             </div>
           </Link>
         </>
       )}
       {!isLoggedIn && (
-        <Link to="/profile" className="header__profile-link">
-          {" "}
-          <div className="header__profile">
-            <button
-              className="header__signup-button"
-              type="button"
-              onClick={handleSignupClick}
-            >
-              Sign Up
-            </button>
-            <button
-              className="header__login-button"
-              type="button"
-              onClick={handleLoginClick}
-            >
-              Log In
-            </button>
-          </div>
-        </Link>
+        <>
+          <Link to="/profile" className="header__profile-link">
+            {" "}
+            <div className="header__profile"></div>
+          </Link>
+          <button
+            className="header__signup-button"
+            type="button"
+            onClick={handleSignupClick}
+          >
+            Sign Up
+          </button>
+          <button
+            className="header__login-button"
+            type="button"
+            onClick={handleLoginClick}
+          >
+            Log In
+          </button>
+        </>
       )}
     </header>
   );

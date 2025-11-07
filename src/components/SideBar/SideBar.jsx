@@ -1,12 +1,20 @@
 import "./SideBar.css";
 
-import avatar from "../../assets/avatar.png";
-
-function SideBar() {
+function SideBar({ currentUser }) {
   return (
     <div className="sidebar">
-      <img src={avatar} alt="Avatar" className="sidebar__avatar" />
-      <p className="sidebar__username">Terrence Tegegne</p>
+      {currentUser.avatar ? (
+        <img
+          src={currentUser.avatar}
+          alt="Avatar"
+          className="sidebar__avatar"
+        />
+      ) : (
+        <div className="sidebar__avatar-placeholder">
+          {currentUser.name.charAt(0)}
+        </div>
+      )}
+      <p className="sidebar__username">{currentUser.name || "Guest"}</p>
     </div>
   );
 }
