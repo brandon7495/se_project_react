@@ -55,6 +55,14 @@ function App() {
     setActiveModal("add-garment");
   };
 
+  const handleSignupClick = () => {
+    setActiveModal("register");
+  };
+
+  const handleLoginClick = () => {
+    setActiveModal("login");
+  };
+
   const closeActiveModal = () => {
     setActiveModal("");
   };
@@ -173,7 +181,14 @@ function App() {
       >
         <div className="app">
           <div className="app__content">
-            <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+            <Header
+              handleSignupClick={handleSignupClick}
+              handleLoginClick={handleLoginClick}
+              handleAddClick={handleAddClick}
+              weatherData={weatherData}
+              isLoggedIn={isLoggedIn}
+              currentUser={currentUser}
+            />
             <Routes>
               <Route
                 path="/"
