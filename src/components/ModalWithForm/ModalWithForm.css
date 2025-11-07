@@ -107,13 +107,13 @@
 .modal__submit-button {
   font-size: 16px;
   line-height: 20px;
-  width: 124px;
+  width: fit-content;
+  padding: 0 16px;
   height: 36px;
   color: #ffffff;
   background-color: #000000;
   border: none;
   border-radius: 4px;
-  padding: 0;
   margin-top: 32px;
   cursor: pointer;
   transition: opacity 0.3s ease-in-out;

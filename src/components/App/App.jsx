@@ -230,6 +230,7 @@ function App() {
             isOpen={activeModal === "login"}
             onClose={closeActiveModal}
             onLoginModalSubmit={handleLoginModalSubmit}
+            handleSignupClick={handleSignupClick}
           />
           <ItemModal
             activeModal={activeModal}
