@@ -40,7 +40,7 @@ const RegisterModal = ({
         <input
           type="email"
           className="modal__input"
-          id="email"
+          id="register-email"
           name="email"
           placeholder="Email"
           required
@@ -53,7 +53,7 @@ const RegisterModal = ({
         <input
           type="password"
           className="modal__input"
-          id="password"
+          id="register-password"
           name="password"
           placeholder="Password"
           required
@@ -66,7 +66,7 @@ const RegisterModal = ({
         <input
           type="text"
           className="modal__input"
-          id="name"
+          id="register-name"
           name="name"
           placeholder="Name"
           required
@@ -81,7 +81,7 @@ const RegisterModal = ({
         <input
           type="url"
           className="modal__input"
-          id="imageUrl"
+          id="register-imageUrl"
           name="imageUrl"
           placeholder="Avatar URL"
           required

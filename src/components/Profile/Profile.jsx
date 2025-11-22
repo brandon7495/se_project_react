@@ -6,8 +6,8 @@ import ClothesSection from "../ClothesSection/ClothesSection";
 function Profile({
   onCardClick,
   clothingItems,
-  handleAddClick,
   currentUser,
+  handleAddClick,
   onEditProfileClick,
   onLogoutClick,
 }) {

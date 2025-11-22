@@ -33,7 +33,7 @@ function AddItemModal({ isOpen, onClose, onAddItemModalSubmit }) {
         <input
           type="text"
           className="modal__input"
-          id="name"
+          id="item-name"
           name="name"
           placeholder="Name"
           required
@@ -48,7 +48,7 @@ function AddItemModal({ isOpen, onClose, onAddItemModalSubmit }) {
         <input
           type="url"
           className="modal__input"
-          id="imageUrl"
+          id="item-imageUrl"
           name="imageUrl"
           placeholder="Image URL"
           required

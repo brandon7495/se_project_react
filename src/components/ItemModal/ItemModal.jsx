@@ -1,10 +1,12 @@
 import "./ItemModal.css";
 
 import closeButtonWhite from "../../assets/close-white.svg";
-
 import useModalClose from "../../hooks/useModalClose";
+import { currentUserContext } from "../../contexts/CurrentUserContext";
+import { useContext } from "react";
 
-function ItemModal({ onClose, card, onDelete, currentUser, isOpen }) {
+function ItemModal({ onClose, card, onDelete, isOpen }) {
+  const currentUser = useContext(currentUserContext);
   const isOwn = card.owner === currentUser._id;
 
   useModalClose(isOpen, onClose);

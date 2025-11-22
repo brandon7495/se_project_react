@@ -40,7 +40,7 @@ const EditProfileModal = ({ isOpen, onClose, onSubmit, currentUser }) => {
         <input
           type="text"
           className="modal__input"
-          id="name"
+          id="profile-name"
           name="name"
           placeholder="Name"
           required
@@ -55,7 +55,7 @@ const EditProfileModal = ({ isOpen, onClose, onSubmit, currentUser }) => {
         <input
           type="url"
           className="modal__input"
-          id="imageUrl"
+          id="profile-imageUrl"
           name="imageUrl"
           placeholder="Avatar URL"
           required

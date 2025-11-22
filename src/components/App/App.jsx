@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 import "./App.css";
 
@@ -138,6 +138,7 @@ function App() {
         setCurrentUser(res);
         closeActiveModal();
         localStorage.setItem("jwt", res.token);
+        useNavigate("/");
       })
       .catch((error) => console.error("Registration failed:", error))
       .finally(() => {
@@ -153,6 +154,7 @@ function App() {
         setCurrentUser(res);
         closeActiveModal();
         localStorage.setItem("jwt", res.token);
+        useNavigate("/");
       })
       .catch((error) => console.error("Login failed:", error))
       .finally(() => {
@@ -160,11 +162,11 @@ function App() {
       });
   };
 
-  const handleEditProfileSubmit = ({ name, avatar }) => {
+  const handleEditProfileSubmit = ({ name, imageUrl }) => {
     setIsLoading(true);
     return updateProfile({
       name,
-      avatar,
+      avatar: imageUrl,
       token: localStorage.getItem("jwt"),
     })
       .then(() => {
@@ -229,7 +231,6 @@ function App() {
               handleAddClick={handleAddClick}
               weatherData={weatherData}
               isLoggedIn={isLoggedIn}
-              currentUser={currentUser}
             />
             <Routes>
               <Route
@@ -282,7 +283,6 @@ function App() {
             card={selectedCard}
             onClose={closeActiveModal}
             onDelete={handleCardDelete}
-            currentUser={currentUser}
           />
           <EditProfileModal
             isOpen={activeModal === "edit-profile"}
