@@ -151,7 +151,6 @@ function App() {
     return signin({ email, password })
       .then((res) => {
         setIsLoggedIn(true);
-        setCurrentUser(res);
         closeActiveModal();
         localStorage.setItem("jwt", res.token);
         useNavigate("/");
@@ -173,7 +172,7 @@ function App() {
         setCurrentUser((prevUser) => ({
           ...prevUser,
           name,
-          avatar,
+          avatar: imageUrl,
         }));
         closeActiveModal();
       })
@@ -197,7 +196,7 @@ function App() {
           localStorage.removeItem("jwt");
         });
     }
-  }, []);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -251,7 +250,6 @@ function App() {
                       onCardClick={handleCardClick}
                       clothingItems={clothingItems}
                       handleAddClick={handleAddClick}
-                      currentUser={currentUser}
                       onEditProfileClick={handleEditProfileClick}
                       onLogoutClick={handleLogoutClick}
                     />
@@ -288,7 +286,6 @@ function App() {
             isOpen={activeModal === "edit-profile"}
             onClose={closeActiveModal}
             onSubmit={handleEditProfileSubmit}
-            currentUser={currentUser}
           />
         </div>
       </CurrentTemperatureUnitContext.Provider>

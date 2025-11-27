@@ -4,7 +4,7 @@ import "./Header.css";
 
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import logo from "../../assets/logo.svg";
-import { currentUserContext } from "../../contexts/CurrentUserContext";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { useContext } from "react";
 
 function Header({
@@ -14,7 +14,7 @@ function Header({
   handleSignupClick,
   handleLoginClick,
 }) {
-  const currentUser = useContext(currentUserContext);
+  const currentUser = useContext(CurrentUserContext);
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",

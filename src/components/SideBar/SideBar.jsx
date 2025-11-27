@@ -1,6 +1,11 @@
 import "./SideBar.css";
 
-function SideBar({ currentUser, onEditProfileClick, onLogoutClick }) {
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { useContext } from "react";
+
+function SideBar({ onEditProfileClick, onLogoutClick }) {
+  const currentUser = useContext(CurrentUserContext);
+
   return (
     <div className="sidebar">
       <div className="sidebar__header">

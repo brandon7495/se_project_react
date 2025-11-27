@@ -1,8 +1,11 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import useForm from "../../hooks/useForm";
 import React from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { useContext } from "react";
 
-const EditProfileModal = ({ isOpen, onClose, onSubmit, currentUser }) => {
+const EditProfileModal = ({ isOpen, onClose, onSubmit }) => {
+  const currentUser = useContext(CurrentUserContext);
   const { values, handleChange, setValues } = useForm({
     name: "",
     imageUrl: "",

@@ -7,8 +7,16 @@
   cursor: pointer;
 }
 
-.card__title {
+.card__header {
   position: absolute;
+  margin: 15px 0 0;
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.card__title {
   margin: 0;
   padding: 2px 12px;
   top: 15px;
@@ -17,6 +25,16 @@
   font-size: 16px;
   line-height: 20px;
   border-radius: 4px;
+}
+
+.card__like-button {
+  margin: 3px 0 0;
+  padding: 0;
+  width: 18px;
+  height: 15px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .card__image {
