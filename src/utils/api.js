@@ -54,4 +54,33 @@ function updateProfile({ name, avatar, token }) {
   });
 }
 
-export { getItems, postItems, deleteItems, request, baseUrl, updateProfile };
+function likeClothingItem(id, token) {
+  return request(`${baseUrl}/items/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+function unlikeClothingItem(id, token) {
+  return request(`${baseUrl}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+export {
+  getItems,
+  postItems,
+  deleteItems,
+  request,
+  baseUrl,
+  updateProfile,
+  likeClothingItem,
+  unlikeClothingItem,
+};

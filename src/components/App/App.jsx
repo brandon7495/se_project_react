@@ -15,6 +15,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import Profile from "../Profile/Profile";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
+import * as api from "../../utils/api";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { coordinates, APIkey } from "../../utils/constants";
 import {
@@ -22,6 +23,8 @@ import {
   postItems,
   deleteItems,
   updateProfile,
+  likeClothingItem,
+  unlikeClothingItem,
 } from "../../utils/api";
 
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
@@ -96,6 +99,27 @@ function App() {
       document.removeEventListener("keydown", handleEscape);
     };
   }, [activeModal]);
+
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = localStorage.getItem("jwt");
+    return !isLiked
+      ? api
+          .likeClothingItem(id, token)
+          .then((updateCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updateCard : item))
+            );
+          })
+          .catch((error) => console.error("Failed to like item:", error))
+      : api
+          .unlikeClothingItem(id, token)
+          .then((updateCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updateCard : item))
+            );
+          })
+          .catch((error) => console.error("Failed to unlike item:", error));
+  };
 
   const handleCardDelete = () => {
     deleteItems(selectedCard._id, localStorage.getItem("jwt"))
@@ -239,6 +263,8 @@ function App() {
                     weatherData={weatherData}
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
+                    onCardLike={handleCardLike}
+                    isLoggedIn={isLoggedIn}
                   />
                 }
               />
@@ -252,6 +278,8 @@ function App() {
                       handleAddClick={handleAddClick}
                       onEditProfileClick={handleEditProfileClick}
                       onLogoutClick={handleLogoutClick}
+                      onCardLike={handleCardLike}
+                      isLoggedIn={isLoggedIn}
                     />
                   </ProtectedRoute>
                 }
