@@ -162,7 +162,6 @@ function App() {
         setCurrentUser(res);
         closeActiveModal();
         localStorage.setItem("jwt", res.token);
-        useNavigate("/");
       })
       .catch((error) => console.error("Registration failed:", error))
       .finally(() => {
@@ -177,7 +176,6 @@ function App() {
         setIsLoggedIn(true);
         closeActiveModal();
         localStorage.setItem("jwt", res.token);
-        useNavigate("/");
       })
       .catch((error) => console.error("Login failed:", error))
       .finally(() => {

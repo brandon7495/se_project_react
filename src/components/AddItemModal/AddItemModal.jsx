@@ -28,7 +28,7 @@ function AddItemModal({ isOpen, onClose, onAddItemModalSubmit }) {
       onClose={onClose}
       onSubmit={handleSubmit}
     >
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="item-name" className="modal__label">
         Name{" "}
         <input
           type="text"
@@ -43,7 +43,7 @@ function AddItemModal({ isOpen, onClose, onAddItemModalSubmit }) {
           value={values.name}
         />
       </label>
-      <label htmlFor="imageUrl" className="modal__label">
+      <label htmlFor="item-imageUrl" className="modal__label">
         Image{" "}
         <input
           type="url"

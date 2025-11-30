@@ -35,7 +35,7 @@ const RegisterModal = ({
       onClose={onClose}
       onSubmit={handleSubmit}
     >
-      <label htmlFor="email" className="modal__label">
+      <label htmlFor="register-email" className="modal__label">
         Email{" "}
         <input
           type="email"
@@ -48,7 +48,7 @@ const RegisterModal = ({
           value={values.email}
         />
       </label>
-      <label htmlFor="password" className="modal__label">
+      <label htmlFor="register-password" className="modal__label">
         Password{" "}
         <input
           type="password"
@@ -61,7 +61,7 @@ const RegisterModal = ({
           value={values.password}
         />
       </label>
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="register-name" className="modal__label">
         Name{" "}
         <input
           type="text"
@@ -76,7 +76,7 @@ const RegisterModal = ({
           value={values.name}
         />
       </label>
-      <label htmlFor="imageUrl" className="modal__label">
+      <label htmlFor="register-imageUrl" className="modal__label">
         Avatar URL{" "}
         <input
           type="url"
