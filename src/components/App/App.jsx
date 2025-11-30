@@ -158,10 +158,7 @@ function App() {
         return signin({ email, password });
       })
       .then((res) => {
-        setIsLoggedIn(true);
-        setCurrentUser(res);
-        closeActiveModal();
-        localStorage.setItem("jwt", res.token);
+        return handleLoginModalSubmit({ email, password });
       })
       .catch((error) => console.error("Registration failed:", error))
       .finally(() => {
