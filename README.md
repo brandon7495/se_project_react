@@ -1,6 +1,6 @@
 # WTWR
 
-A weather application with suggestions on what to wear based on location's temperature. Responsiveness for multiple screen sizes.
+A weather application with suggestions on what to wear based on location's temperature. Registered users have the ability to add their own clothing items to their profile to create more personalized suggestions. There is a toggle available to switch between fahrenheit and celsius if desired.
 
 ## Tech Stack
 
